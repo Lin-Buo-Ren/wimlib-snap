@@ -1,5 +1,5 @@
 # Unofficial Snap Packaging for wimlib
-![Placeholder Icon of wimlib](https://cdn.rawgit.com/Lin-Buo-Ren/snapcrafters-template-plus/bea3bc56/snap/gui/wimlib.png "Placeholder Icon of wimlib")
+![Placeholder Icon of wimlib](https://cdn.rawgit.com/Lin-Buo-Ren/wimlib-snap/93be0c4a/snap/gui/icon.png "Placeholder Icon of wimlib")
 
 **This is the unofficial snap for wimlib**, *"the open source Windows Imaging (WIM) library"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
