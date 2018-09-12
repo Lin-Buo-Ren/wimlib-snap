@@ -7,7 +7,7 @@
 [![Build Status Badge of the `wimlib` Snap](https://build.snapcraft.io/badge/Lin-Buo-Ren/wimlib-snap.svg "Build Status of the `wimlib` snap")](https://build.snapcraft.io/user/Lin-Buo-Ren/wimlib-snap)
 -->
 
-![Screenshot of the Snapped Application](https://cdn.rawgit.com/Lin-Buo-Ren/wimlib-snap/d0c0abcb/snap/screenshots/wimlib-imagex-version.jpg "Screenshot of the Snapped Application")
+![Screenshot of the Snapped Application](https://cdn.rawgit.com/Lin-Buo-Ren/wimlib-snap/9ba674d6/snap/screenshots/wimlib-imagex-version.png "Screenshot of the Snapped Application")
 
 Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with 💝 by Snapcrafters
 
