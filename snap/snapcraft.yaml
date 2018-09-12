@@ -34,9 +34,38 @@ grade: devel
 icon: snap/gui/icon.png
 
 apps:
+  wimlib-imagex:
+    command: bin/classic-launch wimlib-launch wimlib-imagex
+  wimappend:
+    command: bin/classic-launch wimlib-launch wimappend
+  wimapply:
+    command: bin/classic-launch wimlib-launch wimapply
   wimcapture:
-    command: classic-launch wimlib-launch wimcapture
-
+    command: bin/classic-launch wimlib-launch wimcapture
+  wimdelete:
+    command: bin/classic-launch wimlib-launch wimdelete
+  wimexport:
+    command: bin/classic-launch wimlib-launch wimexport
+  wimextract:
+    command: bin/classic-launch wimlib-launch wimextract
+  wimdir:
+    command: bin/classic-launch wimlib-launch wimdir
+  wiminfo:
+    command: bin/classic-launch wimlib-launch wiminfo
+  wimjoin:
+    command: bin/classic-launch wimlib-launch wimjoin
+  wimmount:
+    command: bin/classic-launch wimlib-launch wimmount
+  wimmountrw:
+    command: bin/classic-launch wimlib-launch wimmountrw
+  wimoptimize:
+    command: bin/classic-launch wimlib-launch wimoptimize
+  wimsplit:
+    command: bin/classic-launch wimlib-launch wimsplit
+  wimunmount:
+    command: bin/classic-launch wimlib-launch wimunmount
+  wimverify:
+    command: bin/classic-launch wimlib-launch wimverify
 parts:
   # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
   assets:
@@ -73,9 +102,63 @@ parts:
     - -patches
 
   wimlib:
-    #source:
-    #source-type:
-    #source-tag:
-    #source-depth:
+    source: git://wimlib.net/wimlib
+    source-depth: 100
 
-    plugin: nil
+    build-packages:
+    - libfuse-dev
+    - libxml2-dev
+    - ntfs-3g-dev
+    stage-packages:
+    - libicu55
+    - libxml2
+    - ntfs-3g
+
+    plugin: autotools
+    override-build: |
+      set -eu
+
+      ./bootstrap
+
+      snapcraftctl build
+
+    filesets:
+      copyright:
+      - usr/share/doc/*/copyright
+      executables:
+      - bin/wim*
+      executables-others:
+      - bin/*
+      - sbin/*
+      - usr/bin/*
+      - -$executables-wimlib
+      etc:
+      - etc
+      library-headers:
+      - include
+      library-static:
+      - lib/*.a
+      library-libtool:
+      - lib/*.la
+      library-shared:
+      - lib/*.so*
+      - lib/*/*.so*
+      - usr/lib/*/*.so*
+      manpages:
+      - share/man
+      manpages-others:
+      - usr/share/man
+      pkg-config:
+      - lib/pkgconfig
+
+    stage:
+    - $copyright
+    - $executables
+    - $library-shared
+    - $manpages
+
+    prime:
+    - $copyright
+    - $executables
+    - $library-shared
+    - $manpages
