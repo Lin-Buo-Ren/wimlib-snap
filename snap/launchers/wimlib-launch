@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Launcher for wimlib
+# 林博仁(Buo-ren, Lin) © 2018
+
+set \
+	-o errexit \
+	-o errtrace \
+	-o nounset \
+	-o pipefail
+
+# Make necessary runtime changes to make the snap work
+
+# Finally run the launching command
+exec "${@}"

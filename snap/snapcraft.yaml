@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# Snapcraft Recipe for [Project]
+# Snapcraft Recipe for wimlib
 # ------------------------------
 # This file is in the YAML data serialization format:
 # http://yaml.org
@@ -16,69 +16,27 @@
 # For support refer to the snapcraft section in the Snapcraft Forum:
 # https://forum.snapcraft.io/c/snapcraft
 
-# All following comments, including this one, are designed to be stripped
-# before contributing the recipe to the upstream
-
-# my-awesome-app, my-app-name, my-app-command, my-app-launch, my-app-part
-# are placeholders text meant to be replaced by appropriate content
-
-name: my-awesome-app
-summary: Single-line elevator pitch for your amazing snap under 79 chars.
+name: wimlib
+summary: The open source Windows Imaging (WIM) library
 description: |
-  This is my-awesome-app's description. You have a paragraph or two to tell
-  the most important story about your snap. Keep it under 100 words though,
-  we live in tweetspace and your description wants to look good in the snap
-  store.
+  wimlib is an open source, cross-platform library for creating, extracting, and modifying Windows Imaging (WIM) archives. WIM is a file archiving format, somewhat comparable to ZIP (and many other file archiving formats); but unlike ZIP, it allows storing various Windows-specific metadata, allows storing multiple "images" in a single archive, automatically deduplicates all file contents, and supports optional solid compression to get a better compression ratio. wimlib and its command-line frontend wimlib-imagex provide a free and cross-platform alternative to Microsoft's WIMGAPI, ImageX, and DISM.
 
-# Just for humans, typically '1.2+git' or '1.3.2'
-# The wrapping single quotes are often required to avoid the version string
-# being accidentally interpreted as a YAML non-string(like '1', '1.2').
-# http://yaml.org/type
-# https://arp242.net/weblog/yaml_probably_not_so_great_after_all.html#surprising-behaviour
+  This snap is NOT official, for any issues regarding the use of this snap please refer to the issue tracker:
+  https://github.com/Lin-Buo-Ren/wimlib-snap/issues
+
 version: determined-by-version-script
-
-# (OPTIONAL) The version string can also be dynamically determined via scripting
-# , in this case the value of the `version` key will be ignored (but the key is
-# still required).
-# NOTE: The resulting version string cannot be longer than 32 characters
 version-script: ./snap/utilities/set-snap-version.bash
-#version-script: git -C parts/my-app-part/src describe --always --dirty --tags
 
-confinement: devmode # use 'strict' once you have the right plugs and slots
+# Reason for classic confinement:
+# * Requires raw write access to internal partition's NTFS volumes
+confinement: classic
 grade: devel
-icon: snap/gui/my-awesome-app.png
+icon: snap/gui/icon.png
 
 apps:
-  # If the my-app-name is identical with the my-awesome-app it can be directly run
-  # with `my-awesome-app` or `snap run my-awesome-app`, otherwise it can only be run
-  # via `snap run my-awesome-app.my-app-name` in the terminal.
-  my-app-name:
-    command: my-awesome-app-launch
-    desktop: share/applications/my-awesome-app.desktop
+  wimcapture:
+    command: classic-launch wimlib-launch wimcapture
 
-    # Refer the following documentation for asserting interface plugs and slots in a security confined snap:
-    # Interfaces - doc - snapcraft.io
-    # https://forum.snapcraft.io/t/interfaces/6154
-    # Non-A/C: Non-autoconnect interface
-    plugs:
-    # For snaps with a graphical user interface:
-    - desktop
-    - desktop-legacy
-    - x11
-    - unity7
-    - wayland
-
-    # Storage access
-    #- home
-    #- removable-media # Non-A/C
-
-    #slots:
-
-# Run `snapcraft help sources` for supported keywords on pulling a part's source ingredients
-# Run `snapcraft plugins` for supported build helper plugins
-# Run `snapcraft help plugins` for supported keywords on building a part
-# For `override-*` scriptlets used to modify behavior of certain part's lifecycle phase, check out:
-# https://forum.snapcraft.io/t/scriptlets/4892
 parts:
   # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
   assets:
@@ -114,31 +72,10 @@ parts:
     - -utilities
     - -patches
 
-  # Optional auxiliary part for displaying simple dialogs for better user experience, using Yet Another Dialog
-  yad:
-    after:
-    - desktop-gtk3
-
-    plugin: nil
-    stage-packages:
-    - yad
-
-  my-app-part:
-    after:
-    - assets # for utilities/patch-desktop-entries
-
+  wimlib:
     #source:
     #source-type:
     #source-tag:
     #source-depth:
 
     plugin: nil
-
-    override-stage: |
-      set \
-        -o errexit \
-        -o nounset
-
-      snapcraftctl stage
-
-      utilities/patch-desktop-entries.bash
