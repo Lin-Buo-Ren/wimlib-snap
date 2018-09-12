@@ -35,18 +35,19 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 Browse <https://snapcraft.io/wimlib> and follow the instructions.
 -->
 
-<!-- Uncomment when you have test results
-## What is Working
-* [A list of functionallities that are verified working]
+## Test Results
+### What is Working
+* `wimcapture` an NTFS volume
+* `wiminfo` a WIM file
+* `wimmount` a WIM file and access its content
 
-## What is NOT Working...yet 
-* [A list of functionallities that are verified not working]
+### What is NOT Working...yet 
+None so far.
 
 Check out the [issue tracker](https://github.com/Lin-Buo-Ren/wimlib-snap/issues) for more known issues.
 
-## What is NOT Tested...yet
-* [A list of functionallities that are not tested for any reasons.]
--->
+### What is NOT Tested...yet
+* Anything not listed in the "What is Working" section
 
 ## Support
 * Report issues regarding using this snap to the issue tracker:  
