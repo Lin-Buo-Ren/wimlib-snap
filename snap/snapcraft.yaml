@@ -109,6 +109,7 @@ parts:
     - libfuse-dev
     - libxml2-dev
     - ntfs-3g-dev
+    - pkg-config
     stage-packages:
     - libicu55
     - libxml2
