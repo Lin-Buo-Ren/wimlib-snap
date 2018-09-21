@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Sane environment setting launcher for classic confinement snaps
-# 林博仁(Buo-ren, Lin) © 2018
+# Environment setting launcher for classic confinement snaps
+# This launcher gives priority to in-snap external command and library searching, making classic confinement snaps behave "like" strict confinement snaps.  This launcher should be dropped if the snap isn't in classic confinement.
+# 林博仁(Buo-ren, Lin) <Buo.Ren.Lin@gmail.com> © 2018
 
 set \
 	-o errexit \

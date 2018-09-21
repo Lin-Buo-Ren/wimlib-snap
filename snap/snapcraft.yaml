@@ -25,7 +25,7 @@ description: |
   https://github.com/Lin-Buo-Ren/wimlib-snap/issues
 
 version: determined-by-version-script
-version-script: ./snap/utilities/set-snap-version.bash
+version-script: ./snap/local/utilities/set-snap-version.bash
 
 # Reason for classic confinement:
 # * Requires raw write access to internal partition's NTFS volumes
@@ -70,27 +70,14 @@ apps:
 parts:
   # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
   assets:
-    plugin: nil
+    source: snap/local
+    plugin: dump
 
-    override-pull: |
-      set \
-        -o errexit \
-        -o nounset
+    override-build: ./utilities/install-assets.bash
 
-      # Clear all files in source tree
-      rm \
-        --force \
-        --recursive \
-        --verbose \
-        * \
-        .* \
-        || true # Allow no files found
-
-      cp \
-        --recursive \
-        --verbose \
-        ../../../snap/* \
-        .
+    prime:
+    - -utilities
+    - -patches
 
     override-build: |
       set \
