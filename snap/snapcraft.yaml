@@ -66,6 +66,7 @@ apps:
     command: bin/classic-launch wimlib-launch wimunmount
   wimverify:
     command: bin/classic-launch wimlib-launch wimverify
+
 parts:
   # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
   assets:
