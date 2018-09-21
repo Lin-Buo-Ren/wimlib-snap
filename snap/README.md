@@ -3,9 +3,7 @@
 
 **This is the unofficial snap for wimlib**, *"the open source Windows Imaging (WIM) library"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
-<!-- Uncomment and modify this when you are provided a build status badge
 [![Build Status Badge of the `wimlib` Snap](https://build.snapcraft.io/badge/Lin-Buo-Ren/wimlib-snap.svg "Build Status of the `wimlib` snap")](https://build.snapcraft.io/user/Lin-Buo-Ren/wimlib-snap)
--->
 
 ![Screenshot of the Snapped Application](https://cdn.rawgit.com/Lin-Buo-Ren/wimlib-snap/9ba674d6/snap/screenshots/wimlib-imagex-version.png "Screenshot of the Snapped Application")
 
