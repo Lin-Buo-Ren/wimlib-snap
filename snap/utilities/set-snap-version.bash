@@ -11,22 +11,34 @@ set \
 init(){
 	local \
 		upstream_version \
+		ntfs_3g_version \
 		packaging_revision
 
 	upstream_version="$(
 		git \
 			-C parts/wimlib/src \
 			describe \
+			--abbrev=3 \
 			--always \
 			--dirty=-d \
 			--tags \
 		| sed s/^v//
 	)"
 
+	ntfs_3g_version="$(
+		git \
+			-C parts/ntfs-3g/src \
+			describe \
+			--abbrev=3 \
+			--always \
+			--dirty=-d \
+			--tags
+	)"
+			
 	packaging_revision="$(
 		git \
 			describe \
-			--abbrev=4 \
+			--abbrev=2 \
 			--always \
 			--match nothing \
 			--dirty=-d
@@ -35,7 +47,7 @@ init(){
 	printf \
 		-- \
 		'%s' \
-		"${upstream_version}+pkg-${packaging_revision}"
+		"${upstream_version}+n${ntfs_3g_version}"
 
 	exit 0
 }

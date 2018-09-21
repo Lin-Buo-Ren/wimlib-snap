@@ -111,9 +111,45 @@ parts:
     source-depth: 1
     source-tag: 2017.3.23
 
+    build-packages:
+    - libgcrypt20-dev
     plugin: autotools
+    configflags:
+    - --disable-ldconfig
+    - --disable-static
+
+    filesets:
+      docs:
+      - share/doc/ntfs-3g
+      executables:
+      - bin
+      - sbin
+      library-dynamic:
+      - lib/*.so*
+      library-headers:
+      - include/ntfs-3g
+      library-static:
+      - lib/*.a
+      library-libtool:
+      - lib/*.la
+      manpages:
+      - share/man
+      pkgconfig:
+      - lib/pkgconfig
+
+    stage:
+    - $docs
+    - $library-dynamic
+    - $library-headers
+    - $pkgconfig
+
+    prime:
+    - $library-dynamic
 
   wimlib:
+    after:
+    - ntfs-3g
+
     source: git://wimlib.net/wimlib
     source-depth: 100
 
