@@ -101,6 +101,18 @@ parts:
     - -utilities
     - -patches
 
+  ntfs-3g:
+    # edge branch - BLEEDING EDGE!
+    #source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
+    #source-depth: 1
+
+    # latest stable version
+    source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
+    source-depth: 1
+    source-tag: 2017.3.23
+
+    plugin: autotools
+
   wimlib:
     source: git://wimlib.net/wimlib
     source-depth: 100
@@ -108,12 +120,14 @@ parts:
     build-packages:
     - libfuse-dev
     - libxml2-dev
-    - ntfs-3g-dev
+    # Replaced by ntfs-3g part
+    #- ntfs-3g-dev
     - pkg-config
     stage-packages:
     - libicu55
     - libxml2
-    - ntfs-3g
+    # Replaced by ntfs-3g part
+    #- ntfs-3g
 
     plugin: autotools
     override-build: |
