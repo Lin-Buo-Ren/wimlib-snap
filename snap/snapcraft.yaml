@@ -102,19 +102,69 @@ parts:
     - -utilities
     - -patches
 
+  ntfs-3g:
+    # edge branch - BLEEDING EDGE!
+    #source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
+    #source-depth: 1
+
+    # latest stable version
+    source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
+    source-depth: 1
+    source-tag: 2017.3.23
+
+    build-packages:
+    - libgcrypt20-dev
+    plugin: autotools
+    configflags:
+    - --disable-ldconfig
+    - --disable-static
+
+    filesets:
+      docs:
+      - share/doc/ntfs-3g
+      executables:
+      - bin
+      - sbin
+      library-dynamic:
+      - lib/*.so*
+      library-headers:
+      - include/ntfs-3g
+      library-static:
+      - lib/*.a
+      library-libtool:
+      - lib/*.la
+      manpages:
+      - share/man
+      pkgconfig:
+      - lib/pkgconfig
+
+    stage:
+    - $docs
+    - $library-dynamic
+    - $library-headers
+    - $pkgconfig
+
+    prime:
+    - $library-dynamic
+
   wimlib:
+    after:
+    - ntfs-3g
+
     source: git://wimlib.net/wimlib
     source-depth: 100
 
     build-packages:
     - libfuse-dev
     - libxml2-dev
-    - ntfs-3g-dev
+    # Replaced by ntfs-3g part
+    #- ntfs-3g-dev
     - pkg-config
     stage-packages:
     - libicu55
     - libxml2
-    - ntfs-3g
+    # Replaced by ntfs-3g part
+    #- ntfs-3g
 
     plugin: autotools
     override-build: |
