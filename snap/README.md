@@ -33,9 +33,12 @@ Browse <https://snapcraft.io/wimlib> and follow the instructions.
 
 ## Test Results
 ### What is Working
-* `wimcapture` an NTFS volume
+* `wimcapture` an NTFS volume, with none/maximum compression as superuser
 * `wiminfo` a WIM file
 * `wimmount` a WIM file and access its content
+* `wimverify` a WIM file with and without integrity data
+* `wimapply` a `wimcapture` created WIM file to a NTFS volume as superuser
+* `wimapply` a DISM created WIM file to a NTFS volume as superuser
 
 ### What is NOT Working...yet 
 None so far.
