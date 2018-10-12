@@ -35,37 +35,85 @@ icon: snap/gui/icon.png
 
 apps:
   wimlib-imagex:
-    command: bin/classic-launch wimlib-launch wimlib-imagex
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimlib-imagex
   wimappend:
-    command: bin/classic-launch wimlib-launch wimappend
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimappend
   wimapply:
-    command: bin/classic-launch wimlib-launch wimapply
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimapply
   wimcapture:
-    command: bin/classic-launch wimlib-launch wimcapture
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimcapture
   wimdelete:
-    command: bin/classic-launch wimlib-launch wimdelete
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimdelete
   wimexport:
-    command: bin/classic-launch wimlib-launch wimexport
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimexport
   wimextract:
-    command: bin/classic-launch wimlib-launch wimextract
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimextract
   wimdir:
-    command: bin/classic-launch wimlib-launch wimdir
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimdir
   wiminfo:
-    command: bin/classic-launch wimlib-launch wiminfo
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wiminfo
   wimjoin:
-    command: bin/classic-launch wimlib-launch wimjoin
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimjoin
   wimmount:
-    command: bin/classic-launch wimlib-launch wimmount
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimmount
   wimmountrw:
-    command: bin/classic-launch wimlib-launch wimmountrw
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimmountrw
   wimoptimize:
-    command: bin/classic-launch wimlib-launch wimoptimize
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimoptimize
   wimsplit:
-    command: bin/classic-launch wimlib-launch wimsplit
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimsplit
   wimunmount:
-    command: bin/classic-launch wimlib-launch wimunmount
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimunmount
   wimverify:
-    command: bin/classic-launch wimlib-launch wimverify
+    command: >
+      bin/classic-launch
+      wimlib-launch
+      wimverify
 
 parts:
   # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
