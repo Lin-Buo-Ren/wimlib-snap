@@ -31,11 +31,26 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 Browse <https://snapcraft.io/wimlib> and follow the instructions.
 -->
 
+## Release Model
+As wimlib's compatiblity with NTFS volumes greatly depends on libntfs-3g's capability, a special release model is established to let user get the full benefits (and risks) of the newer version of libntfs-3g.
+
+As wimlib's backup capability doesn't match DISM's yet, always keep additional backup using DISM for your important NTFS volumes!
+
+| Channel | Build Configuration |
+| :-: | :-: |
+| stable | latest stable release of wimlib + latest stable release of ntfs-3g |
+| candidate | N/A |
+| beta | latest development snapshot of wimlib + latest stable release of ntfs-3g |
+| edge | latest development snapshot of wimlib + **latest development snapshot of ntfs-3g** |
+
 ## Test Results
 ### What is Working
-* `wimcapture` an NTFS volume
+* `wimcapture` an NTFS volume, with none/maximum compression as superuser
 * `wiminfo` a WIM file
 * `wimmount` a WIM file and access its content
+* `wimverify` a WIM file with and without integrity data
+* `wimapply` a `wimcapture` created WIM file to a NTFS volume as superuser
+* `wimapply` a DISM created WIM file to a NTFS volume as superuser
 
 ### What is NOT Working...yet 
 None so far.
