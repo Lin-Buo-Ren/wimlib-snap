@@ -35,74 +35,6 @@ confinement: strict
 grade: devel
 icon: snap/gui/icon.png
 
-apps:
-  wimlib-imagex:
-    adapter: full
-    command: bin/wimlib-imagex
-    command-chain: &command-chain
-    - bin/classic-launch
-    - bin/wimlib-launch
-  wimappend:
-    adapter: full
-    command: bin/wimappend
-    command-chain: *command-chain
-  wimapply:
-    adapter: full
-    command: bin/wimapply
-    command-chain: *command-chain
-  wimcapture:
-    adapter: full
-    command: bin/wimcapture
-    command-chain: *command-chain
-  wimdelete:
-    adapter: full
-    command: bin/wimdelete
-    command-chain: *command-chain
-  wimexport:
-    adapter: full
-    command: bin/wimexport
-    command-chain: *command-chain
-  wimextract:
-    adapter: full
-    command: bin/wimextract
-    command-chain: *command-chain
-  wimdir:
-    adapter: full
-    command: bin/wimdir
-    command-chain: *command-chain
-  wiminfo:
-    adapter: full
-    command: bin/wiminfo
-    command-chain: *command-chain
-  wimjoin:
-    adapter: full
-    command: bin/wimjoin
-    command-chain: *command-chain
-  wimmount:
-    adapter: full
-    command: bin/wimmount
-    command-chain: *command-chain
-  wimmountrw:
-    adapter: full
-    command: bin/wimmountrw
-    command-chain: *command-chain
-  wimoptimize:
-    adapter: full
-    command: bin/
-    command-chain: *command-chain
-  wimsplit:
-    adapter: full
-    command: bin/wimsplit
-    command-chain: *command-chain
-  wimunmount:
-    adapter: full
-    command: bin/wimunmount
-    command-chain: *command-chain
-  wimverify:
-    adapter: full
-    command: bin/wimverify
-    command-chain: *command-chain
-
 parts:
   # Files to patch the files in the snap
   patching:
@@ -244,6 +176,74 @@ parts:
     - $executables
     - $library-shared
     - $manpages
+
+apps:
+  wimlib-imagex:
+    adapter: full
+    command: bin/wimlib-imagex
+    command-chain: &command-chain
+    - bin/classic-launch
+    - bin/wimlib-launch
+  wimappend:
+    adapter: full
+    command: bin/wimappend
+    command-chain: *command-chain
+  wimapply:
+    adapter: full
+    command: bin/wimapply
+    command-chain: *command-chain
+  wimcapture:
+    adapter: full
+    command: bin/wimcapture
+    command-chain: *command-chain
+  wimdelete:
+    adapter: full
+    command: bin/wimdelete
+    command-chain: *command-chain
+  wimexport:
+    adapter: full
+    command: bin/wimexport
+    command-chain: *command-chain
+  wimextract:
+    adapter: full
+    command: bin/wimextract
+    command-chain: *command-chain
+  wimdir:
+    adapter: full
+    command: bin/wimdir
+    command-chain: *command-chain
+  wiminfo:
+    adapter: full
+    command: bin/wiminfo
+    command-chain: *command-chain
+  wimjoin:
+    adapter: full
+    command: bin/wimjoin
+    command-chain: *command-chain
+  wimmount:
+    adapter: full
+    command: bin/wimmount
+    command-chain: *command-chain
+  wimmountrw:
+    adapter: full
+    command: bin/wimmountrw
+    command-chain: *command-chain
+  wimoptimize:
+    adapter: full
+    command: bin/
+    command-chain: *command-chain
+  wimsplit:
+    adapter: full
+    command: bin/wimsplit
+    command-chain: *command-chain
+  wimunmount:
+    adapter: full
+    command: bin/wimunmount
+    command-chain: *command-chain
+  wimverify:
+    adapter: full
+    command: bin/wimverify
+    command-chain: *command-chain
 
 plugs:
   block-devices: # Non-A/C
