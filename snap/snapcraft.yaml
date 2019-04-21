@@ -133,14 +133,14 @@ parts:
 
   ntfs-3g:
     # edge branch - BLEEDING EDGE!
-    #source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
-    #source-depth: 1
-    #source-branch: edge
-
-    # latest stable version
     source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
     source-depth: 1
-    source-tag: 2017.3.23
+    source-branch: edge
+
+    # latest stable version
+    #source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
+    #source-depth: 1
+    #source-tag: 2017.3.23
 
     build-packages:
     - libgcrypt20-dev
