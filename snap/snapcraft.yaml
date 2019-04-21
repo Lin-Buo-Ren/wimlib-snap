@@ -1,4 +1,4 @@
-%YAML 1.2
+%YAML 1.1
 ---
 # Snapcraft Recipe for wimlib
 # ------------------------------
@@ -15,7 +15,6 @@
 #   https://forum.snapcraft.io/c/doc
 # For support refer to the snapcraft section in the Snapcraft Forum:
 # https://forum.snapcraft.io/c/snapcraft
-
 name: wimlib
 summary: The open source Windows Imaging (WIM) library
 description: |
@@ -24,88 +23,119 @@ description: |
   This snap is NOT official, for any issues regarding the use of this snap please refer to the issue tracker:
   https://github.com/Lin-Buo-Ren/wimlib-snap/issues
 
-version: determined-by-version-script
-version-script: ./snap/utilities/set-snap-version.bash
+adopt-info: wimlib
+assumes:
+- command-chain
 
-# Reason for classic confinement:
-# * Requires raw write access to internal partition's NTFS volumes
-confinement: classic
+# block-devices interface requirement
+- snapd2.37
+
+base: core
+confinement: strict
 grade: devel
 icon: snap/gui/icon.png
 
 apps:
   wimlib-imagex:
-    command: bin/classic-launch wimlib-launch wimlib-imagex
+    adapter: full
+    command: bin/wimlib-imagex
+    command-chain: &command-chain
+    - bin/classic-launch
+    - bin/wimlib-launch
   wimappend:
-    command: bin/classic-launch wimlib-launch wimappend
+    adapter: full
+    command: bin/wimappend
+    command-chain: *command-chain
   wimapply:
-    command: bin/classic-launch wimlib-launch wimapply
+    adapter: full
+    command: bin/wimapply
+    command-chain: *command-chain
   wimcapture:
-    command: bin/classic-launch wimlib-launch wimcapture
+    adapter: full
+    command: bin/wimcapture
+    command-chain: *command-chain
   wimdelete:
-    command: bin/classic-launch wimlib-launch wimdelete
+    adapter: full
+    command: bin/wimdelete
+    command-chain: *command-chain
   wimexport:
-    command: bin/classic-launch wimlib-launch wimexport
+    adapter: full
+    command: bin/wimexport
+    command-chain: *command-chain
   wimextract:
-    command: bin/classic-launch wimlib-launch wimextract
+    adapter: full
+    command: bin/wimextract
+    command-chain: *command-chain
   wimdir:
-    command: bin/classic-launch wimlib-launch wimdir
+    adapter: full
+    command: bin/wimdir
+    command-chain: *command-chain
   wiminfo:
-    command: bin/classic-launch wimlib-launch wiminfo
+    adapter: full
+    command: bin/wiminfo
+    command-chain: *command-chain
   wimjoin:
-    command: bin/classic-launch wimlib-launch wimjoin
+    adapter: full
+    command: bin/wimjoin
+    command-chain: *command-chain
   wimmount:
-    command: bin/classic-launch wimlib-launch wimmount
+    adapter: full
+    command: bin/wimmount
+    command-chain: *command-chain
   wimmountrw:
-    command: bin/classic-launch wimlib-launch wimmountrw
+    adapter: full
+    command: bin/wimmountrw
+    command-chain: *command-chain
   wimoptimize:
-    command: bin/classic-launch wimlib-launch wimoptimize
+    adapter: full
+    command: bin/
+    command-chain: *command-chain
   wimsplit:
-    command: bin/classic-launch wimlib-launch wimsplit
+    adapter: full
+    command: bin/wimsplit
+    command-chain: *command-chain
   wimunmount:
-    command: bin/classic-launch wimlib-launch wimunmount
+    adapter: full
+    command: bin/wimunmount
+    command-chain: *command-chain
   wimverify:
-    command: bin/classic-launch wimlib-launch wimverify
+    adapter: full
+    command: bin/wimverify
+    command-chain: *command-chain
 
 parts:
-  # Assets from the snap packaging, refer each READMEs under the `snap` folder for more information
-  assets:
-    plugin: nil
-
-    override-pull: |
-      set \
-        -o errexit \
-        -o nounset
-
-      # Clear all files in source tree
-      rm \
-        --force \
-        --recursive \
-        --verbose \
-        * \
-        .* \
-        || true # Allow no files found
-
-      cp \
-        --recursive \
-        --verbose \
-        ../../../snap/* \
-        .
-
-    override-build: |
-      set \
-        -o errexit \
-        -o nounset
-
-      ./utilities/install-assets.bash
+  # Files to patch the files in the snap
+  patching:
+    source: snap/local/patching
+    plugin: dump
+    organize:
+      '*': patching/
     prime:
-    - -utilities
-    - -patches
+    - -*
+
+  # Launcher programs to fix problems at runtime
+  launchers:
+    source: snap/local/launchers
+    plugin: dump
+    organize:
+      '*': bin/
+    stage:
+    - -bin/README.*
+
+  # Programs to modify the behavior of each step of the snapcraft lifecycles
+  scriptlets:
+    source: snap/local/scriptlets
+    plugin: dump
+    organize:
+      '*': scriptlets/
+    prime:
+    - -*
 
   ntfs-3g:
     # edge branch - BLEEDING EDGE!
     #source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
     #source-depth: 1
+    #source-branch: edge
 
     # latest stable version
     source: git://git.code.sf.net/p/ntfs-3g/ntfs-3g
@@ -150,6 +180,7 @@ parts:
   wimlib:
     after:
     - ntfs-3g
+    - scriptlets
 
     source: git://wimlib.net/wimlib
     source-depth: 100
@@ -167,12 +198,11 @@ parts:
     #- ntfs-3g
 
     plugin: autotools
-    override-build: |
-      set -eu
+    override-pull: |
+      set -o nounset
 
-      ./bootstrap
-
-      snapcraftctl build
+      snapcraftctl pull
+      "${SNAPCRAFT_STAGE}"/scriptlets/main-adopt-info
 
     filesets:
       copyright:
@@ -214,3 +244,10 @@ parts:
     - $executables
     - $library-shared
     - $manpages
+
+plugs:
+  block-devices: # Non-A/C
+
+  # Regular file access
+  home:
+  removable-media: # Non-A/C
